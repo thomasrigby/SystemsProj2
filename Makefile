@@ -5,17 +5,16 @@
 CC = gcc
 CFLAGS = -std=c11 -Wall -Werror
 LDFLAGS = -lm
+OBJECTS = trove.o directoryTraverser.o
 
 all: trove
 
-project : trove.o
-	gcc -std=c11 -Wall -Werror -o project trove.o
+trove: $(OBJECTS)
+	$(CC) $(CFLAGS) -o trove $(OBJECTS) $(LDFLAGS)
 
-trove.o : trove.c trove.h
-	gcc -std=c11 -Wall -Werror -c trove.c
+trove.o: trove.c trove.h
 
-directoryTraverser.o : 
-	gcc -std=c11 -Wall -Werror -c directoryTraverser.c
+directoryTraverser.o: directoryTraverser.c trove.h
 
-clean :
-	rm project trove.o
+clean:
+	rm -f trove $(OBJECTS)

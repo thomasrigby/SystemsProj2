@@ -4,6 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <dirent.h>
+#include <sys/stat.h>
 
 //creating a construct that stores the valyes of the files in the filelist 
 //for the trove file to traverse through and determine x/y/z
@@ -22,4 +23,4 @@ struct filelist
 
 //Define global functions
 extern int usage();
-extern int directoryTraverser(char *directoryName);
+extern int traverseDirectory(char *directoryName);

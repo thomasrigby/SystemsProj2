@@ -1,31 +1,39 @@
 #include "trove.h"
 
 
-//Recursive function to traverse through all child directories of directory given
-int traverseDirectory(char *directoryName)
-{
-    struct dirent *dir;
-    DIR *d = opendir(directoryName);
-    if (d)
-    {
-        while ((dir = readdir(d)) != NULL)
-        {
-            if (dir->d_type == DT_DIR)
-            {
-                char path[1024];
-                int len = snprintf(path, sizeof(path)-1, "%s/%s", directoryName, dir->d_name);
-                path[len] = 0;
-                if (strcmp(dir->d_name, ".") == 0 || strcmp(dir->d_name, "..") == 0)
-                    continue;
-                printf("%s", path);
-                traverseDirectory(path);
-            }
-            else
-            {
-                printf("%s/%s", directoryName, dir->d_name);
-            }
-        }
-        closedir(d);
+
+//Recursive function to traverse through all child directories of directory given and prints all files in the directory
+int traverseDirectory(char *directoryName){
+    DIR *directory;
+    struct dirent *directoryEntry;
+    struct stat fileStat;
+    char path[1024];
+    
+    directory = opendir(directoryName);
+    if(directory == NULL){
+        printf("Error opening directory %s", directoryName);
+        return 1;
     }
+
+    while((directoryEntry = readdir(directory)) != NULL){
+        if(strcmp(directoryEntry->d_name, ".") == 0 || strcmp(directoryEntry->d_name, "..") == 0){
+            continue;
+        }
+        sprintf(path, "%s/%s", directoryName, directoryEntry->d_name);
+        if(stat(path, &fileStat) < 0){
+            printf("Error getting file stats for %s", path);
+            continue;
+        }
+        if(S_ISDIR(fileStat.st_mode)){
+            traverseDirectory(path);
+        }
+        else{
+            //This is where we call a different function to store the words.
+            printf("%s \n", path);
+        }
+    }
+
+    closedir(directory);
+
     return 0;
 }
