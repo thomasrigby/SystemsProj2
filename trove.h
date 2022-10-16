@@ -1,17 +1,12 @@
-
-//creating a Hashtable that stores the valyes of the files in the filelist 
-//for the trove file to traverse through and determine x/y/z
-//Hashtable will contain the elements of a filelist that meet a criteria 
-//Return the filename and the pathname 
-
-#define _POSIX_C_SOURCE  200809L
-
+//header file to define structs to store directories and values 
 #include <stdio.h>
-#include <stdbool.h>
-#include <stdint.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <string.h>
+#include <ctype.h>
+#include <dirent.h>
+#include <sys/stat.h>
+
+extern int traverseDirectory(char *directoryName);
 
 
 typedef struct _list{
