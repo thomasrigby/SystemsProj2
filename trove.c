@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
   else if((strcmp(argv[1],"-f") == 0))
     {
       if((strcmp(argv[3], "-b"))==0){
-        printf("Build a file named %s \n", );
+        printf("Build a file named %s \n", argv[2]);
       }
       if((strcmp(argv[3], "-r"))==0){
         printf("Removing a file from filelist\n");
