@@ -1,12 +1,7 @@
 //Project 2 which creates a command line utility program 
 //to build, find and compress files 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "trove.h"
-#include <ctype.h>
-#include <dirent.h>
 
 
 //report the program's synopsis, should a command-line process detect errors
@@ -36,6 +31,8 @@ int modifyFile()
 // command line format is ./trove  [-f trovefile]  [-b  |  -r  |  -u]  [-l length]  filelist
 int main(int argc, char *argv[])
 {
+  directoryTraverser(argv[1]);
+
   if(argc < 3) //3 arguments required to find file 
   {
     printf("Not enough arguments to find file\n");

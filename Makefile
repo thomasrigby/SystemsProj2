@@ -2,19 +2,20 @@
 # Compil with -stdc11 -Wall -Werror
 # We are linking trove.c trove.h
 
-
 CC = gcc
 CFLAGS = -std=c11 -Wall -Werror
 LDFLAGS = -lm
 
 all: trove
 
-trove: trove.o
-	$(CC) $(CFLAGS) -o trove trove.o $(LDFLAGS)
+project : trove.o
+	gcc -std=c11 -Wall -Werror -o project trove.o
 
-trove.o: trove.c trove.h
+trove.o : trove.c trove.h
+	gcc -std=c11 -Wall -Werror -c trove.c
 
-clean:
-	rm -f *.o trove
+directoryTraverser.o : 
+	gcc -std=c11 -Wall -Werror -c directoryTraverser.c
 
-
+clean :
+	rm project trove.o
