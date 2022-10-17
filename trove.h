@@ -5,32 +5,37 @@
 #include <ctype.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <unistd.h>
+#include <getopt.h>
 
 
 extern int traverseDirectory(char *directoryName);
 
 
-typedef struct _list{
-    char           *s;
-    struct _list   *follow;
-} LIST; 
+// struct list;
 
-LIST *list_new(void)
-{
-    return NULL;
-}
+// typedef struct _list{
+//     char           *s;
+//     struct _list   *follow;
+// } LIST; 
 
-LIST *list_add(LIST *oldlist, char *s)
-{
-    LIST *newlist = malloc(sizeof(LIST));
-    //check....
+// LIST *list_new(void)
+// {
+//     return NULL;
+// }
 
-    newlist->s = strdup(s);
-    //check....
+// LIST *list_add(LIST *oldlist, char *s)
+// {
+//     LIST *newlist = malloc(sizeof(LIST));
+//     //check....
+
+//     newlist->s = s;
+//     //check....
     
-    newlist->follow = oldlist; 
+//     newlist->follow = oldlist; 
 
-    return newlist; 
-}
+//     return newlist; 
+// }
+
 
 
