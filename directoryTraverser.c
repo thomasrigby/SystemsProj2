@@ -1,11 +1,11 @@
 #include "trove.h"
 
-
+#define LIST *mylist
 
 //Recursive function to traverse through all child directories of directory given and prints all files in the directory
 int traverseDirectory(char *directoryName){
     DIR *directory;
-    LIST *mylist;
+   
     struct dirent *directoryEntry;
     struct stat fileStat;
     char path[1024];
@@ -39,4 +39,6 @@ int traverseDirectory(char *directoryName){
     closedir(directory);
 
     return 0;
-}
+} 
+
+

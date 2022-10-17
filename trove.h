@@ -6,6 +6,7 @@
 #include <dirent.h>
 #include <sys/stat.h>
 
+
 extern int traverseDirectory(char *directoryName);
 
 
@@ -31,3 +32,5 @@ LIST *list_add(LIST *oldlist, char *s)
 
     return newlist; 
 }
+
+
