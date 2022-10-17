@@ -5,7 +5,6 @@
 //Recursive function to traverse through all child directories of directory given and prints all files in the directory
 int traverseDirectory(char *directoryName){
     DIR *directory;
-    LIST *mylist;
     struct dirent *directoryEntry;
     struct stat fileStat;
     char path[1024];
@@ -30,9 +29,9 @@ int traverseDirectory(char *directoryName){
         }
         else{
             //This is where we call a different function to store the words.
-            mylist = list_add(mylist, directoryEntry->d_name);
+            // mylist = list_add(mylist, directoryEntry->d_name);
             //trovePrint(mylist);
-            //printf("%s \n", path);
+            printf("%s \n", path);
         }
     }
 
