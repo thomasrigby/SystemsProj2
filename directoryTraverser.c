@@ -30,9 +30,8 @@ int traverseDirectory(char *directoryName){
         }
         else{
             //This is where we call a different function to store the words.
-            // mylist = list_add(mylist, directoryEntry->d_name);
-            //trovePrint(mylist);
-            printf("%s \n", path);
+             addToHash(path);
+            //printf("%s \n", path);
         }
     }
 

@@ -1,47 +1,7 @@
 //Project 2 which creates a command line utility program 
 //to build, find and compress files 
-#define POSIX_SOURCE
 
 #include "trove.h"
-
-
-
-// int trovePrint(LIST *list)
-// {
-//     while(list != NULL){
-//         printf("%s\n", list->s);
-//         list = list->follow;
-//     }
-//     return 0;
-// }
-
-// void makeFileList(char *argv[])
-// {
-//     struct dirent *files;
-//     DIR *file_list;
-//     LIST *mylist;
-
-
-//     file_list = opendir(".");  
-//     if(file_list == NULL)
-//     {
-//         printf("Unable to open directory");
-//         exit(0); 
-//     }
-//     else
-//     {
-//        printf("Directory opened!\n");
-//         while ((files = readdir(file_list)) != NULL)
-//                 {
-//                     //printf("[%s]\n", files->d_name);
-//                     mylist = list_add(mylist, files->d_name);
-//                 }     
-//                 trovePrint(mylist);
-                     
-//         }
-//         closedir(file_list);  
-// }
-
 
 //main function to receive and validate the command-line options and arguments
 //command line format is  ./trove  [-f trovefile]  word 
@@ -52,6 +12,9 @@ int main(int argc, char *argv[]){
   int opt;
   int argFlag = 0;
   int length = 4;
+
+    traverseDirectory(argv[1]); //calling before checks (temporary)
+    printHashTable(); //printing hash table before checks for now
 
   //We are using opt to get the command line options
   while ((opt = getopt(argc, argv, "f:brul:")) != -1) {
@@ -103,7 +66,7 @@ int main(int argc, char *argv[]){
       // findWord(trovefile, word);
     }
   }
-  else if(argFlag == 1){
+  else if(argFlag == 1){    
     if (argc - optind != 1) {
       fprintf(stderr, "Usage: %s [-f trovefile] [-b] [-l length] filelist\n", argv[0]);
       exit(EXIT_FAILURE);
@@ -141,9 +104,6 @@ int main(int argc, char *argv[]){
     exit(1);
   }
 
-  //makeFileList(&argv[1]);
-
-  traverseDirectory(argv[1]);
-
+  
   return 0;
 }

@@ -1,6 +1,9 @@
 //header file to define structs to store directories and values 
+#define POSIX_SOURCE 200809L
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
 #include <ctype.h>
 #include <dirent.h>
@@ -8,34 +11,23 @@
 #include <unistd.h>
 #include <getopt.h>
 
+//defining struct and type LIST 
+typedef struct fileList{
+    char           *stringVal;
+    struct fileList    *nextVal;
+} LIST;
+
+extern LIST *newList(void); 
+
+extern LIST *addToList(LIST *previousList, char *stringVal);
+
+extern void printList(LIST *list);
 
 extern int traverseDirectory(char *directoryName);
 
+extern uint32_t hashValue(char *string);
 
-// struct list;
+extern void addToHash(char *string);
 
-// typedef struct _list{
-//     char           *s;
-//     struct _list   *follow;
-// } LIST; 
-
-// LIST *list_new(void)
-// {
-//     return NULL;
-// }
-
-// LIST *list_add(LIST *oldlist, char *s)
-// {
-//     LIST *newlist = malloc(sizeof(LIST));
-//     //check....
-
-//     newlist->s = s;
-//     //check....
-    
-//     newlist->follow = oldlist; 
-
-//     return newlist; 
-// }
-
-
+extern void printHashTable(void);
 

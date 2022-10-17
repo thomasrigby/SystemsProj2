@@ -5,7 +5,7 @@
 CC = gcc
 CFLAGS = -std=c11 -Wall -Werror
 LDFLAGS = -lm
-OBJECTS = trove.o directoryTraverser.o
+OBJECTS = trove.o directoryTraverser.o ds.o hash.o
 
 all: trove
 
