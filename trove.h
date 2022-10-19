@@ -1,6 +1,7 @@
 //header file to define structs to store directories and values 
 #define POSIX_SOURCE 200809L
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -23,11 +24,16 @@ extern LIST *addToList(LIST *previousList, char *stringVal);
 
 extern void printList(LIST *list);
 
-extern int traverseDirectory(char *directoryName);
+extern int traverseDirectory(char *directoryName, char *word);
 
 extern uint32_t hashValue(char *string);
 
 extern void addToHash(char *string);
 
 extern void printHashTable(void);
+
+extern int troveCheck(char *argv[]);
+
+extern char findWordInTrove(char *directory, char *word);
+
 

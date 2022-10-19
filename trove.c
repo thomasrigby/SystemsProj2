@@ -7,15 +7,17 @@
 //command line format is  ./trove  [-f trovefile]  word 
 // command line format is ./trove  [-f trovefile]  [-b  |  -r  |  -u]  [-l length]  filelist
 int main(int argc, char *argv[]){
-
+  char *word = argv[3];
   char *trovefile = "/tmp/trove";
   int opt;
   int argFlag = 0;
   int length = 4;
-
-    traverseDirectory(argv[1]); //calling before checks (temporary)
-    printHashTable(); //printing hash table before checks for now
-
+  char *homeDir = ".";
+    
+    traverseDirectory(homeDir, word); //calling before checks (temporary)
+    //printf("%s", PATH);
+   //troveCheck(&argv[2]);
+ 
   //We are using opt to get the command line options
   while ((opt = getopt(argc, argv, "f:brul:")) != -1) {
     switch (opt) {
@@ -62,8 +64,8 @@ int main(int argc, char *argv[]){
     }
     else{
       char *word = argv[optind];
-      printf("word: %s", word);
-      // findWord(trovefile, word);
+      printf("word: %s\n", word);
+      //findWordInList(trovefile, &word);
     }
   }
   else if(argFlag == 1){    
@@ -103,7 +105,9 @@ int main(int argc, char *argv[]){
     printf("Error: Invalid argument\n");
     exit(1);
   }
-
-  
+    //troveCheck(&argv[2]);
+    //traverseDirectory(argv[2]); //calling before checks (temporary)
+    //printHashTable(); //printing hash table before checks for now
+    //printf("Filelist has been made from %s\n", argv[2]);
   return 0;
 }

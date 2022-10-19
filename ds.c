@@ -10,12 +10,10 @@ LIST *newList(void)
 LIST *addToList(LIST *previousList, char *stringVal)
 {
     LIST *newlist = malloc(sizeof(LIST));
-    //check....
 
     //newlist adding value of string as a duplicate copy
     newlist->stringVal = strdup(stringVal);
-    //check....
-    
+
     newlist->nextVal = previousList; 
 
     return newlist; 
@@ -29,3 +27,7 @@ void printList(LIST *list){
         list = list->nextVal;
     }
 }
+
+
+
+
