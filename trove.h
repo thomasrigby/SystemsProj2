@@ -24,7 +24,7 @@ extern LIST *addToList(LIST *previousList, char *stringVal);
 
 extern void printList(LIST *list);
 
-extern int traverseDirectory(char *directoryName, char *word, char *troveFileName);
+extern int traverseDirectory(char *directoryName, int length);
 
 extern uint32_t hashValue(char *string);
 

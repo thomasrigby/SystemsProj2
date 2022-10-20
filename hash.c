@@ -32,3 +32,9 @@ void printHashTable(void)
             printList(hashtable[i]); 
         }
 }
+
+
+//add more arguyments 
+//create an array to store filenames and directories
+//directory traverse 
+//re-read documentation 

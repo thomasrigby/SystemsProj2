@@ -7,23 +7,19 @@
 //command line format is  ./trove  [-f trovefile]  word 
 // command line format is ./trove  [-f trovefile]  [-b  |  -r  |  -u]  [-l length]  filelist
 int main(int argc, char *argv[]){
-  char *word = argv[3];
+  //char *word = argv[3];
   char *trovefile = "/tmp/trove";
-  char *source = argv[2];
+  //char *source = argv[2];
   int opt;
   int argFlag = 0;
   int length = 4;
-  char *homeDir = ".";
+  //char *homeDir = ".";
+  char fileArray[100];
+ 
 
-  //Concatenation 
-  // char startArr[strlen(source)+1];
-  // strcpy(startArr, source);
-  // char final [strlen(startArr)+1];
-  // strcpy(final, startArr);
-  // strcat(homeDir, final);
 
 //Call to find trove file and search for word 
-traverseDirectory(homeDir, source, word);
+ //traverseDirectory(homeDir, length);
   //We are using opt to get the command line options
   while ((opt = getopt(argc, argv, "f:brul:")) != -1) {
     switch (opt) {
@@ -75,14 +71,17 @@ traverseDirectory(homeDir, source, word);
     }
   }
   else if(argFlag == 1){    
-    if (argc - optind != 1) {
+    if (argc - optind == 0) {
       fprintf(stderr, "Usage: %s [-f trovefile] [-b] [-l length] filelist\n", argv[0]);
       exit(EXIT_FAILURE);
     }
     else{
-      char *filelist = argv[optind];
-      // buildTrove(trovefile, filelist, length);
-      printf("Building trove file %s from filelist %s with length %d\n", trovefile, filelist, length);
+      for(int i = optind; i < argc; i++){
+          char *filelist = argv[i];
+          strcpy(&fileArray[i], filelist);
+          traverseDirectory(&fileArray[i], length);
+      printf("Building trove file %s from filelist %s with length %d\n", trovefile, &fileArray[i], length);
+    }
     }
   }
   else if(argFlag == 2){
@@ -111,10 +110,7 @@ traverseDirectory(homeDir, source, word);
     printf("Error: Invalid argument\n");
     exit(1);
   }
-  
- 
 
- 
     // troveCheck(&argv[2]);
     // printHashTable(); //printing hash table before checks for now
     // printf("Filelist has been made from %s\n", argv[2]);

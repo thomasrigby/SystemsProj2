@@ -2,7 +2,7 @@
 
 
 //Recursive function to traverse through all child directories of directory given and prints all files in the directory
-int traverseDirectory(char *directoryName, char *source, char *word){
+int traverseDirectory(char *directoryName, int length){
     DIR *directory;
     //char *defaultTroveF = "/tmp/trove";
     struct dirent *directoryEntry;
@@ -25,7 +25,7 @@ int traverseDirectory(char *directoryName, char *source, char *word){
             continue;
         }
         if(S_ISDIR(fileStat.st_mode)){
-            traverseDirectory(path, source, word);
+            traverseDirectory(path, length);
         }
         else{
             //This is where we call a different function to store the words.
@@ -33,38 +33,38 @@ int traverseDirectory(char *directoryName, char *source, char *word){
              //If path contains argv[/tmp/trove] then findWordCheck
             
             //printf("%s \n", path);
-            if(strstr(path, source)!=0){
-            printf("The file %s has been found!\n", path);
-            printf("%s\n", path); 
-            findWordInTrove(path, word); 
-            }         
+            // if(strstr(path, source)!=0){
+            // printf("The file %s has been found!\n", path);
+            // printf("%s\n", path); 
+            // findWordInTrove(path, word); 
+            // }         
             }
     }
     closedir(directory);
     return 0;
 } 
 
-char findWordInTrove(char *directory, char *word)
-{
-     FILE    *textfile;
-    char    line[1024];
-    textfile = fopen(directory, "r");
-    if(textfile == NULL)
-        return 1;
+// char findWordInTrove(char *directory, char *word)
+// {
+//      FILE    *textfile;
+//     char    line[1024];
+//     textfile = fopen(directory, "r");
+//     if(textfile == NULL)
+//         return 1;
 
-    printf("The pathnames in this file with the desired word are...\n");
+//     printf("The pathnames in this file with the desired word are...\n");
 
-    while(fgets(line, 1024, textfile))
-    {
-    if(strstr(line, word)!=0)
-        printf("%s\n",line);
-    }
+//     while(fgets(line, 1024, textfile))
+//     {
+//     if(strstr(line, word)!=0)
+//         printf("%s\n",line);
+//     }
 
-    fclose(textfile);
-    return 0;
-     //printf("%d pathnames were found containing %c\n",num, word);
-    return 0;
-}
+//     fclose(textfile);
+//     return 0;
+//      //printf("%d pathnames were found containing %c\n",num, word);
+//     return 0;
+// }
     
 
 
