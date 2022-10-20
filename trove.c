@@ -9,15 +9,21 @@
 int main(int argc, char *argv[]){
   char *word = argv[3];
   char *trovefile = "/tmp/trove";
+  char *source = argv[2];
   int opt;
   int argFlag = 0;
   int length = 4;
   char *homeDir = ".";
-    
-    traverseDirectory(homeDir, word); //calling before checks (temporary)
-    //printf("%s", PATH);
-   //troveCheck(&argv[2]);
- 
+
+  //Concatenation 
+  // char startArr[strlen(source)+1];
+  // strcpy(startArr, source);
+  // char final [strlen(startArr)+1];
+  // strcpy(final, startArr);
+  // strcat(homeDir, final);
+
+//Call to find trove file and search for word 
+traverseDirectory(homeDir, source, word);
   //We are using opt to get the command line options
   while ((opt = getopt(argc, argv, "f:brul:")) != -1) {
     switch (opt) {
@@ -105,9 +111,12 @@ int main(int argc, char *argv[]){
     printf("Error: Invalid argument\n");
     exit(1);
   }
-    //troveCheck(&argv[2]);
-    //traverseDirectory(argv[2]); //calling before checks (temporary)
-    //printHashTable(); //printing hash table before checks for now
-    //printf("Filelist has been made from %s\n", argv[2]);
+  
+ 
+
+ 
+    // troveCheck(&argv[2]);
+    // printHashTable(); //printing hash table before checks for now
+    // printf("Filelist has been made from %s\n", argv[2]);
   return 0;
 }

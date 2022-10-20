@@ -1,19 +1,19 @@
 #include "trove.h"
 
 //structure of directory contents (unsure if we need this)
-int troveCheck(char *argv[])
+int buildList()
 {
-    DIR *t; 
+    DIR *f; 
     struct dirent *trovefile;
-    t = opendir(".");
+    f = opendir(".");
 
-    if(t == NULL)
+    if(f == NULL)
     {
         printf("Error opening directory!\n");
     }
     
     LIST *filelist = malloc(sizeof(LIST));
-    while((trovefile = readdir(t)) != NULL)
+    while((trovefile = readdir(f)) != NULL)
     { 
        filelist = addToList(filelist, trovefile->d_name); 
     }
@@ -21,4 +21,9 @@ int troveCheck(char *argv[])
     printList(filelist);
     //findWordInList(filelist, &argv[3]);
    return 0;
+}
+
+int buildTrove(LIST *list)
+{
+    return 0;
 }
