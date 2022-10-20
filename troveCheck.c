@@ -23,3 +23,21 @@ int buildList()
    return 0;
 }
 
+void findTrove(char *pathname)
+{
+    //given the pathname (if one not provided, /tmp/trove), use realpath to see if it exists 
+    //if it does, (for now), print something
+    //if it doesn't print failure 
+    //String concatention time 
+   
+    char buf[PATH_MAX+1];
+    char *path = realpath(pathname, buf);
+    if(path != NULL)
+    {
+        printf("The complete file path of %s is: %s\n", pathname, buf);
+    }
+    else{
+        printf("Failure!\n");
+    }
+   
+}

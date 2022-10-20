@@ -12,8 +12,8 @@ int main(int argc, char *argv[]){
   int argFlag = 0;
   int length = 4;
   LIST *fl = malloc(sizeof(LIST));
-
- 
+  
+  //CALLING REALPATH to find realpath of trove-file
 
 //Call to find trove file and search for word 
  //traverseDirectory(homeDir, length);
@@ -62,9 +62,14 @@ int main(int argc, char *argv[]){
       exit(EXIT_FAILURE);
     }
     else{
-    char *word = argv[optind];
-    printf("word: %s\n", word);
-    //findWordInList(trovefile, &word);
+     //See if trove file exists from optind - 1(if not specified, /tmp/trove is standard)
+     //if it does...print pathnames with desired word from hash
+     //if it doesn't throw error
+    char str [strlen(argv[2])+1];
+    strcpy(str, ".");
+    strcat(str, argv[2]);
+    findTrove(str);
+  }
   }
   else if(argFlag == 1){    
     if (argc - optind == 0) {
@@ -95,5 +100,7 @@ int main(int argc, char *argv[]){
     exit(1);
   }
   printList(fl);
+  
   return 0;
+
 }
