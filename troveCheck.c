@@ -23,7 +23,3 @@ int buildList()
    return 0;
 }
 
-int buildTrove(LIST *list)
-{
-    return 0;
-}
