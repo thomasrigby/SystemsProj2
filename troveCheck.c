@@ -34,10 +34,11 @@ void findTrove(char *pathname)
     char *path = realpath(pathname, buf);
     if(path != NULL)
     {
-        printf("The complete file path of %s is: %s\n", pathname, buf);
+        printf("The complete file path of trove file %s is: %s\n", pathname, buf);
+        //Call printWord 
     }
     else{
-        printf("Failure!\n");
+        printf("Trove file does not exist\n");
     }
    
 }

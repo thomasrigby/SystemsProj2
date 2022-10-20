@@ -36,8 +36,6 @@ extern void printHashTable(void);
 
 extern int buildList();
 
-extern int buildTrove(LIST *list, char *troveFile, int length);
-
 extern char findWordInTrove(char *directory, char *word);
 
 extern void findTrove(char *pathname);
