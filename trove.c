@@ -62,20 +62,20 @@ int main(int argc, char *argv[]){
       exit(EXIT_FAILURE);
     }
     else{
-    char *word = argv[optind];
-    printf("word: %s\n", word);
-    //findWordInList(trovefile, &word);
-  }
-  else if(argFlag == 1){    
+      char *word = argv[optind];
+      printf("word: %s\n", word);
+      //findWordInList(trovefile, &word);
+    }
+  } else if(argFlag == 1) {    
     if (argc - optind == 0) {
       fprintf(stderr, "Usage: %s [-f trovefile] [-b] [-l length] filelist\n", argv[0]);
       exit(EXIT_FAILURE);
-    }
-    else{
+    } else {
       for(int i = optind; i < argc; i++){
           char *filelist = argv[i];
           fl = addToList(fl, filelist);
       }
+      buildTrove(fl, trovefile, length);
     }
   }
   else if(argFlag == 2){

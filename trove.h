@@ -25,7 +25,7 @@ extern LIST *addToList(LIST *previousList, char *stringVal);
 
 extern void printList(LIST *list);
 
-extern LIST *traverseDirectory(char *directoryName, char *word, char *troveFileName);
+extern LIST *traverseDirectory(char *directoryName);
 
 extern uint32_t hashValue(char *string);
 
@@ -35,7 +35,7 @@ extern void printHashTable(void);
 
 extern int buildList();
 
-extern int buildTrove(LIST *list);
+extern int buildTrove(LIST *list, char *troveFile, int length);
 
 extern char findWordInTrove(char *directory, char *word);
 
