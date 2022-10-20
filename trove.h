@@ -11,6 +11,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <getopt.h>
+#include <stdint.h>
 
 //defining struct and type LIST 
 typedef struct fileList{

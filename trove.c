@@ -14,6 +14,7 @@ int main(int argc, char *argv[]){
   int argFlag = 0;
   int length = 4;
   char *homeDir = ".";
+  char fileList[1024]="";
 
   //Concatenation 
   // char startArr[strlen(source)+1];
@@ -64,57 +65,42 @@ traverseDirectory(homeDir, source, word);
   }
 
   if(argFlag == 0){
-    if (argc - optind != 1) {
-      fprintf(stderr, "Usage: %s [-f trovefile] word\n", argv[0]);
-      exit(EXIT_FAILURE);
-    }
-    else{
-      char *word = argv[optind];
-      printf("word: %s\n", word);
-      //findWordInList(trovefile, &word);
-    }
+    char *word = argv[optind];
+    printf("word: %s\n", word);
+    //findWordInList(trovefile, &word);
   }
   else if(argFlag == 1){    
-    if (argc - optind != 1) {
-      fprintf(stderr, "Usage: %s [-f trovefile] [-b] [-l length] filelist\n", argv[0]);
-      exit(EXIT_FAILURE);
-    }
-    else{
-      char *filelist = argv[optind];
-      // buildTrove(trovefile, filelist, length);
-      printf("Building trove file %s from filelist %s with length %d\n", trovefile, filelist, length);
-    }
+      for(optind = optind; optind < argc; optind++){
+        printf("adding %s to the filelist\n", argv[optind]);
+        strcat(fileList, "|");
+        strcat(fileList, argv[optind]);
+      }
+      printf("The full filelist is %s \n", fileList);
+      printf("Building trove file %s from filelist %s with length %d\n", trovefile, fileList, length);
   }
   else if(argFlag == 2){
-    if (argc - optind != 1) {
-      fprintf(stderr, "Usage: %s [-f trovefile] [-r] [-l length] filelist\n", argv[0]);
-      exit(EXIT_FAILURE);
+    for(optind = optind; optind < argc; optind++){
+      printf("adding %s to the filelist\n", argv[optind]);
+      strcat(fileList, "|");
+      strcat(fileList, argv[optind]);
     }
-    else{
-      char *filelist = argv[optind];
-      printf("Removing from trove file %s from filelist %s with length %d\n", trovefile, filelist, length);
-      // removeFile(trovefile, filelist, length);
-    }
+    printf("The full filelist is %s \n", fileList);
+    printf("Removing filelist %s from trove file %s\n", fileList, trovefile);
+    
   }
   else if(argFlag == 3){
-    if (argc - optind != 1) {
-      fprintf(stderr, "Usage: %s [-f trovefile] [-u] filelist\n", argv[0]);
-      exit(EXIT_FAILURE);
+    for(optind = optind; optind < argc; optind++){
+      printf("adding %s to the filelist\n", argv[optind]);
+      strcat(fileList, "|");
+      strcat(fileList, argv[optind]);
     }
-    else{
-      char *filelist = argv[optind];
-      printf("Updating trove file %s from filelist %s\n", trovefile, filelist);
-      // updateTrove(trovefile, filelist);
-    }
+    printf("The full filelist is %s \n", fileList);
+    printf("Updating trove file %s with filelist %s\n", trovefile, fileList);
   }
   else{
     printf("Error: Invalid argument\n");
     exit(1);
   }
-  
- 
-
- 
     // troveCheck(&argv[2]);
     // printHashTable(); //printing hash table before checks for now
     // printf("Filelist has been made from %s\n", argv[2]);

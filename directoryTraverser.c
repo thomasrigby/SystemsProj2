@@ -33,13 +33,16 @@ int traverseDirectory(char *directoryName, char *source, char *word){
              //If path contains argv[/tmp/trove] then findWordCheck
             
             //printf("%s \n", path);
-            if(strstr(path, source)!=0){
-            printf("The file %s has been found!\n", path);
-            printf("%s\n", path); 
-            findWordInTrove(path, word); 
-            }         
-            }
+            // if(strstr(path, source)!=0){
+            //     printf("The file %s has been found!\n", path);
+            //     printf("%s\n", path); 
+            //     findWordInTrove(path, word); 
+            // }
+            // printf("Current File is %s\n", path);     
+        }
     }
+
+
     closedir(directory);
     return 0;
 } 
