@@ -2,17 +2,18 @@
 
 
 //Recursive function to traverse through all child directories of directory given and prints all files in the directory
-int traverseDirectory(char *directoryName, char *source, char *word){
+LIST *traverseDirectory(char *directoryName, char *source, char *word){
     DIR *directory;
     //char *defaultTroveF = "/tmp/trove";
     struct dirent *directoryEntry;
     struct stat fileStat;
     char path[1024];
+    LIST *list = newList();
    
     directory = opendir(directoryName);
     if(directory == NULL){
         printf("Error opening directory %s\n", directoryName);
-        return 1;
+        exit(1);
     }
 
     while((directoryEntry = readdir(directory)) != NULL){
@@ -28,23 +29,12 @@ int traverseDirectory(char *directoryName, char *source, char *word){
             traverseDirectory(path, source, word);
         }
         else{
-            //This is where we call a different function to store the words.
-             //addToHash(path); //this should be called to add words to for each pathname (index in trove = hash value for word)
-             //If path contains argv[/tmp/trove] then findWordCheck
-            
-            //printf("%s \n", path);
-            // if(strstr(path, source)!=0){
-            //     printf("The file %s has been found!\n", path);
-            //     printf("%s\n", path); 
-            //     findWordInTrove(path, word); 
-            // }
-            // printf("Current File is %s\n", path);     
+            //lets make a list and add the files to the list
+            addToList(list, path);
         }
     }
-
-
     closedir(directory);
-    return 0;
+    return list;
 } 
 
 char findWordInTrove(char *directory, char *word)
