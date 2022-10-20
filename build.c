@@ -38,22 +38,17 @@ int buildTrove(LIST *list, char *troveFile, int length){
         char *filename = extensiveFileList->stringVal;
 
         char *string = filename;
-
-        //Read each word i nthis file
-        //Store each word in hashtable
-        //append hashed value to string
-        //once all words are read and stored,
-        //append string to troveFile
-
-        //use fscanf to read each word
         char *word = malloc(sizeof(char) * length);
 
         while(fscanf(file, "%s", word) != EOF){
-            //Add word to hashtable
-            addToHash(word);
-            //Append hashed value to string
-            char *hash = hashValue(word);
-            strcat(string, hash);
+            //make sure the word is not too long
+            if(strlen(word) < length){
+                //Add word to hashtable
+                addToHash(word);
+                //Append hashed value to string
+                char *hash = hashValue(word);
+                strcat(string, hash);
+            }
         }
         //Append string to troveFile
         fprintf(troveFile, ",%s", string);
