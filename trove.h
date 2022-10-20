@@ -11,6 +11,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <getopt.h>
+#include <stdint.h>
 
 //defining struct and type LIST 
 typedef struct fileList{
@@ -24,7 +25,7 @@ extern LIST *addToList(LIST *previousList, char *stringVal);
 
 extern void printList(LIST *list);
 
-extern int traverseDirectory(char *directoryName, int length);
+extern int traverseDirectory(char *directoryName);
 
 extern uint32_t hashValue(char *string);
 
