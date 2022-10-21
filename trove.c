@@ -12,7 +12,7 @@ int main(int argc, char *argv[]){
   int argFlag = 0;
   int length = 4;
   LIST *fl = malloc(sizeof(LIST));
-  
+ 
   //CALLING REALPATH to find realpath of trove-file
 
 //Call to find trove file and search for word 
@@ -64,18 +64,20 @@ int main(int argc, char *argv[]){
      //See if trove file exists from optind - 1(if not specified, /tmp/trove is standard)
      //if it does...print pathnames with desired word from hash
      //if it doesn't throw error
+     int word = hashValue(argv[optind]);
      if(strcmp(argv[1], "-f")==0)
      {
         char str [strlen(argv[2])+1];
         strcpy(str, ".");
         strcat(str, argv[2]);
-        // findTrove(str);
+        findTrove(str, word);
      }
      else{
         char str [strlen(trovefile)+1];
         strcpy(str, ".");
         strcat(str, trovefile);
-        // findTrove(str);
+        //printf("%s\n", str);
+        findTrove(str, word);
      }
     }
   }

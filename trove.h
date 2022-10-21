@@ -35,8 +35,6 @@ extern void addToHash(char *string);
 
 extern void printHashTable(void);
 
-extern int buildList();
-
 extern char findWordInTrove(char *directory, char *word);
 
 extern int buildTrove(LIST *list, char *troveFile, int length);
@@ -48,6 +46,10 @@ extern void ingestHashTableFromFile(char *troveFile);
 extern int searchForTokenInTrove(char *token, char *troveFile);
 
 extern int removeTokenFromStoredHashMap(char *token, char *troveFile);
+
+extern void findTrove(char *pathname, int word);
+
+extern void printDashF(char *pathname, int word);
 
 extern int MAX;
 
