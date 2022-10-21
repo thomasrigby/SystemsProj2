@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include <getopt.h>
 #include <stdint.h>
+#include <limits.h>
 
 
 //defining struct and type LIST 
@@ -36,11 +37,9 @@ extern void printHashTable(void);
 
 extern int buildList();
 
-extern int buildTrove(LIST *list, char *troveFile, int length);
-
 extern char findWordInTrove(char *directory, char *word);
 
-extern char *reverseHash(uint32_t hash);
+extern void findTrove(char *pathname);
 
 extern int MAX;
 

@@ -7,20 +7,20 @@
 //command line format is  ./trove  [-f trovefile]  word 
 // command line format is ./trove  [-f trovefile]  [-b  |  -r  |  -u]  [-l length]  filelist
 int main(int argc, char *argv[]){
-  char *trovefile = "tmp/trove.txt";
+  char *trovefile = "/tmp/trove.txt";
   int opt;
   int argFlag = 0;
   int length = 4;
   LIST *fl = malloc(sizeof(LIST));
-
   
+  //CALLING REALPATH to find realpath of trove-file
 
 //Call to find trove file and search for word 
   //We are using opt to get the command line options
   while ((opt = getopt(argc, argv, "f:brul:")) != -1) {
     switch (opt) {
     case 'f':
-      trovefile = optarg;
+      //trovefile = optarg;
       break;
     case 'b':
       if (argFlag == 0) {
@@ -61,11 +61,25 @@ int main(int argc, char *argv[]){
       exit(EXIT_FAILURE);
     }
     else{
-      char *word = argv[optind];
-      printf("word: %s\n", word);
-      //findWordInList(trovefile, &word);
+     //See if trove file exists from optind - 1(if not specified, /tmp/trove is standard)
+     //if it does...print pathnames with desired word from hash
+     //if it doesn't throw error
+     if(strcmp(argv[1], "-f")==0)
+     {
+        char str [strlen(argv[2])+1];
+        strcpy(str, ".");
+        strcat(str, argv[2]);
+        findTrove(str);
+     }
+     else{
+        char str [strlen(trovefile)+1];
+        strcpy(str, ".");
+        strcat(str, trovefile);
+        findTrove(str);
+     }
     }
-  } else if(argFlag == 1) {    
+  }
+  else if(argFlag == 1){    
     if (argc - optind == 0) {
       fprintf(stderr, "Usage: %s [-f trovefile] [-b] [-l length] filelist\n", argv[0]);
       exit(EXIT_FAILURE);
@@ -74,7 +88,7 @@ int main(int argc, char *argv[]){
           char *filelist = argv[i];
           fl = addToList(fl, filelist);
       }
-      buildTrove(fl, trovefile, length);
+      //buildTrove(fl, trovefile, length);
     }
   }
   else if(argFlag == 2){
@@ -94,6 +108,7 @@ int main(int argc, char *argv[]){
     exit(1);
   }
   printList(fl);
-  printf("This is the end of main\n");
+  
   return 0;
+
 }

@@ -24,5 +24,7 @@ hash.o: hash.c trove.h
 
 troveCheck.o: troveCheck.c trove.h
 
+
+
 clean:
 	rm -f trove $(OBJECTS)
