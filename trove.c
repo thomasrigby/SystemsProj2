@@ -7,16 +7,15 @@
 //command line format is  ./trove  [-f trovefile]  word 
 // command line format is ./trove  [-f trovefile]  [-b  |  -r  |  -u]  [-l length]  filelist
 int main(int argc, char *argv[]){
-  char *trovefile = "/tmp/trove";
+  char *trovefile = "tmp/trove.txt";
   int opt;
   int argFlag = 0;
   int length = 4;
   LIST *fl = malloc(sizeof(LIST));
 
- 
+  
 
 //Call to find trove file and search for word 
- //traverseDirectory(homeDir, length);
   //We are using opt to get the command line options
   while ((opt = getopt(argc, argv, "f:brul:")) != -1) {
     switch (opt) {
@@ -95,5 +94,6 @@ int main(int argc, char *argv[]){
     exit(1);
   }
   printList(fl);
+  printf("This is the end of main\n");
   return 0;
 }

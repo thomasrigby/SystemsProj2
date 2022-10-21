@@ -1,8 +1,8 @@
 #include "trove.h"
+//defining hashtable as global variable with max size
 
-#define MAX      40 //arbitrary amount, will change (40 just to show values)
-
-LIST *hashtable[MAX]; //defining hashtable as global variable with max size
+int MAX = 40;
+LIST *hashtable[40];
 
 //converts string value to hash values
 uint32_t hashValue(char *address){
@@ -29,6 +29,24 @@ void printHashTable(void)
             printList(hashtable[i]); 
         }
 }
+
+int getHashValue(char *word){
+    //get index of hash table from hash value
+    int h = hashValue(word) %MAX;
+    //get list from hash table
+    LIST *list = hashtable[h];
+    //loop through list
+    while(list != NULL){
+        //if word is found in list return 1
+        if(strcmp(list->stringVal, word) == 0){
+            return 1;
+        }
+        list = list->nextVal;
+    }
+    //if word is not found in list return 0
+    return -1;
+}
+
 
 //Store each hash table key and value in trove file so that it can be regurgitated later
 //Then build the hash table by reading trove file
@@ -76,3 +94,4 @@ int buildHash(FILE *fp, LIST *list){
     fflush(stdout);
     return EXIT_SUCCESS;
 }
+

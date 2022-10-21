@@ -6,59 +6,91 @@
 
 int buildTrove(LIST *list, char *troveFile, int length){
 
-    //Traverse directory of each file in the list, and store it in the troveFile
-    FILE *troveFile = fopen(troveFile, "w");
-
-    if(troveFile == NULL){
-        printf("Error opening trove file");
+    //Run TraverseDirectory on each file in the list
+    while(list->stringVal != NULL){
+        traverseDirectory(list->stringVal);
+        list = list->nextVal;
+    }
+    //Open the tempfile
+    FILE *tempFile = fopen("tempFile.txt", "r");
+    if(tempFile == NULL){
+        printf("Error opening tempfile");
+        exit(1);
+    }
+    //read the tempfile
+    char *line = NULL;
+    size_t len = 0;
+    ssize_t read;
+    //Create a new troveFile
+    FILE *newTroveFile = fopen(troveFile, "w+");
+    if(newTroveFile == NULL){
+        printf("Error opening troveFile");
         exit(1);
     }
 
-    //Go through each file in the list, and add it to another list
-    LIST *extensiveFileList = newList();
-    while(list != NULL){
-        //traverseDirectory returns a list of all the files in a directory
-        extensiveFileList = traverseDirectory(list->stringVal, extensiveFileList);
-        list = list->nextVal;
-    }
+    char *hashmap = malloc(sizeof(char) * 10000);
+    strcat(hashmap, "hashtable:");
 
-    //Build a hashtable first
-    LIST *newHashTable[65536];
-    
-    //Now that the hashtable is built, we go through each file to get each word
-    //We need a string with format /Filename : 1, 2, 3, with each integer representing the hash value of the word
-    //We then add this string to the troveFile on an empty line at the bottom.
-    while(extensiveFileList != NULL){
+    //Read the tempfile line by line
+    while((read = getline(&line, &len, tempFile)) != -1){
+        //Remove the newline character
+        line[strlen(line) - 1] = '\0';
         //Open the file
-        FILE *file = fopen(extensiveFileList->stringVal, "r");
+        FILE *file = fopen(line, "r");
         if(file == NULL){
-            printf("Error opening file %s", extensiveFileList->stringVal);
+            printf("Error opening file");
             exit(1);
         }
-        char *filename = extensiveFileList->stringVal;
-
-        char *string = filename;
-        char *word = malloc(sizeof(char) * length);
-
-        while(fscanf(file, "%s", word) != EOF){
-            //make sure the word is not too long
-            if(strlen(word) < length){
-                //Add word to hashtable
-                addToHash(word);
-                //Append hashed value to string
-                char *hash = hashValue(word);
-                strcat(string, hash);
+        //Read the file
+        char *fileLine = NULL;
+        size_t fileLen = 0;
+        ssize_t fileRead;
+        char *string = line;
+        //Read the file and get each word
+        while((fileRead = getline(&fileLine, &fileLen, file)) != -1){
+            //Remove the newline character
+            fileLine[strlen(fileLine)] = '\0';
+            //Get the word
+            char *word = strtok(fileLine, " ");
+            //While there are still words
+            while(word != NULL){
+                //If the word is the correct length
+                if(strlen(word) == length){
+                    printf("This is the word: %s\n", word);
+                    addToHash(word);
+                    char *hashString = malloc(sizeof(char) * 10);
+                    sprintf(hashString, "%d", (hashValue(word)%MAX));
+                    if(strstr(string, hashString) == NULL){
+                        strcat(string, " ");
+                        strcat(string, hashString);
+                    }
+                    if(strstr(hashmap, hashString) == NULL){
+                        strcat(hashmap, " {");
+                        strcat(hashmap, hashString);
+                        strcat(hashmap, ":");
+                        strcat(hashmap, word);
+                        strcat(hashmap, "}");
+                    }
+   
+                }
+                //Get the next word
+                word = strtok(NULL, " ");
             }
+            fprintf(newTroveFile, "%s\n", string);
         }
-        //Append string to troveFile
-        fprintf(troveFile, ",%s", string);
-        extensiveFileList = extensiveFileList->nextVal;
-
-        //Close current file
+        //Close the file
         fclose(file);
-
     }
 
+    //Close the tempfile
+    fclose(tempFile);
+    //Close the troveFile
+    fprintf(newTroveFile, "%s", hashmap);
+    fclose(newTroveFile);
 
+    //Delete the tempfile
+    remove("tempFile.txt");
+
+    return 0;
 }
 

@@ -1,8 +1,10 @@
 #include "trove.h"
 
-LIST *newList(void)
-{
-    return NULL;
+LIST *newList(void){
+    LIST *list = malloc(sizeof(LIST));
+    list->stringVal = NULL;
+    list->nextVal = NULL;
+    return list;
 }
 
 //adds string values to list 
@@ -21,13 +23,19 @@ LIST *addToList(LIST *previousList, char *stringVal)
 
 //function to print the list 
 void printList(LIST *list){
-    while(list != NULL)
-    {
-        printf("%s\n", list->stringVal);
+
+    while(list != NULL){
+        printf("List Value: %s\n", list->stringVal);
         list = list->nextVal;
     }
 }
 
+LIST *getToHead(LIST *list){
+    while(list->nextVal != NULL){
+        list = list->nextVal;
+    }
+    return list;
+}
 
 
 

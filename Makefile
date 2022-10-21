@@ -3,9 +3,9 @@
 # We are linking trove.c trove.h
 
 CC = gcc
-CFLAGS = -std=c11 -Wall -Werror
+CFLAGS = -Wall -Werror -g
 LDFLAGS = -lm
-OBJECTS = trove.o directoryTraverser.o ds.o hash.o troveCheck.o 
+OBJECTS = trove.o directoryTraverser.o ds.o hash.o troveCheck.o build.o
 
 all: trove
 
@@ -15,6 +15,8 @@ trove: $(OBJECTS)
 trove.o: trove.c trove.h
 
 directoryTraverser.o: directoryTraverser.c trove.h
+
+build.o: build.c trove.h
 
 ds.o: ds.c trove.h
 

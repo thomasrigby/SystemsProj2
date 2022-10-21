@@ -13,6 +13,7 @@
 #include <getopt.h>
 #include <stdint.h>
 
+
 //defining struct and type LIST 
 typedef struct fileList{
     char           *stringVal;
@@ -25,7 +26,7 @@ extern LIST *addToList(LIST *previousList, char *stringVal);
 
 extern void printList(LIST *list);
 
-extern LIST *traverseDirectory(char *directoryName);
+extern void traverseDirectory(char *directoryName);
 
 extern uint32_t hashValue(char *string);
 
@@ -39,4 +40,8 @@ extern int buildTrove(LIST *list, char *troveFile, int length);
 
 extern char findWordInTrove(char *directory, char *word);
 
+extern char *reverseHash(uint32_t hash);
 
+extern int MAX;
+
+extern LIST *hashtable[];
