@@ -56,7 +56,6 @@ int buildTrove(LIST *list, char *troveFile, int length){
             while(word != NULL){
                 //If the word is the correct length
                 if(strlen(word) == length){
-                    printf("This is the word: %s\n", word);
                     addToHash(word);
                     char *hashString = malloc(sizeof(char) * 10);
                     sprintf(hashString, "%d", (hashValue(word)%MAX));
@@ -76,8 +75,8 @@ int buildTrove(LIST *list, char *troveFile, int length){
                 //Get the next word
                 word = strtok(NULL, " ");
             }
-            fprintf(newTroveFile, "%s\n", string);
         }
+        fprintf(newTroveFile, "%s\n", string);
         //Close the file
         fclose(file);
     }

@@ -7,7 +7,7 @@
 //command line format is  ./trove  [-f trovefile]  word 
 // command line format is ./trove  [-f trovefile]  [-b  |  -r  |  -u]  [-l length]  filelist
 int main(int argc, char *argv[]){
-  char *trovefile = "/tmp/trove.txt";
+  char *trovefile = "./tmp/trove.txt";
   int opt;
   int argFlag = 0;
   int length = 4;
@@ -69,13 +69,13 @@ int main(int argc, char *argv[]){
         char str [strlen(argv[2])+1];
         strcpy(str, ".");
         strcat(str, argv[2]);
-        findTrove(str);
+        // findTrove(str);
      }
      else{
         char str [strlen(trovefile)+1];
         strcpy(str, ".");
         strcat(str, trovefile);
-        findTrove(str);
+        // findTrove(str);
      }
     }
   }
@@ -88,7 +88,7 @@ int main(int argc, char *argv[]){
           char *filelist = argv[i];
           fl = addToList(fl, filelist);
       }
-      //buildTrove(fl, trovefile, length);
+      buildTrove(fl, trovefile, length);
     }
   }
   else if(argFlag == 2){

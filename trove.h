@@ -39,7 +39,7 @@ extern int buildList();
 
 extern char findWordInTrove(char *directory, char *word);
 
-extern void findTrove(char *pathname);
+extern int buildTrove(LIST *list, char *troveFile, int length);
 
 extern int MAX;
 
