@@ -7,7 +7,7 @@
 //command line format is  ./trove  [-f trovefile]  word 
 // command line format is ./trove  [-f trovefile]  [-b  |  -r  |  -u]  [-l length]  filelist
 int main(int argc, char *argv[]){
-  char *trovefile = "./tmp/trove.txt";
+  char *trovefile = "/tmp/trove.txt";
   int opt;
   int argFlag = 0;
   int length = 4;
@@ -76,7 +76,6 @@ int main(int argc, char *argv[]){
         char str [strlen(trovefile)+1];
         strcpy(str, ".");
         strcat(str, trovefile);
-        //printf("%s\n", str);
         findTrove(str, word);
      }
     }
@@ -90,7 +89,10 @@ int main(int argc, char *argv[]){
           char *filelist = argv[i];
           fl = addToList(fl, filelist);
       }
-      buildTrove(fl, trovefile, length);
+       char str [strlen(trovefile)+1];
+        strcpy(str, ".");
+        strcat(str, trovefile);
+      buildTrove(fl, str, length);
     }
   }
   else if(argFlag == 2){
@@ -110,7 +112,7 @@ int main(int argc, char *argv[]){
     printf("Error: Invalid argument\n");
     exit(1);
   }
-  printList(fl);
+  //printList(fl);
   
   return 0;
 

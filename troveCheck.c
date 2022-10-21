@@ -11,14 +11,14 @@ void findTrove(char *pathname, int word)
     char *path = realpath(pathname, buf);
     if(path != NULL)
     {
-        printf("The complete file path of trove file %s is: %s\n", pathname, buf);
-        printf("Searching through trove-file to print pathnames\n");
+        // printf("The complete file path of trove file %s is: %s\n", pathname, buf);
+        // printf("Searching through trove-file to print pathnames\n");
      //Call printWord 
      printDashF(pathname, word);
     }
           
     else{
-        printf("Trove file does not exist\n");
+        printf("Trove file does not exist!\n");
         }
     
 }
@@ -29,8 +29,10 @@ void printDashF(char *pathname, int word)
     size_t len = 0;
     ssize_t read;
     char wString[10000];
-    //char buf[PATH_MAX+1];
-    //char *path = realpath(pathname, buf);
+    const char s[1] = " ";
+    char *token;
+    char buf[PATH_MAX+1];
+   
     //printf("%d\n", word%10000);
     sprintf(wString, "%d", word%10000);
     //printf("%s\n", wString);
@@ -42,8 +44,13 @@ void printDashF(char *pathname, int word)
             }
          while((read = getline(&line, &len, t)) != -1){
           if((strstr(line, lineStart) && strstr(line, wString))){
-            
-            printf("%s\n", line);
+            token = strtok(line, s);
+            /* walk through other tokens */
+            while(token != NULL) {
+                token = strtok(NULL, s);
+            }
+             char *path = realpath(line, buf);
+            printf("%s\n", path);
          }
         }
 }

@@ -1,0 +1,4 @@
+./Current/past/stop.txt 9173 5281 8693 292 1127
+./Current/past/h.txt 9173 5281 8693 292 1127
+./Current/past/hello.txt 9173 9832 1369
+hashtable: {9173 like} {5281 That} {8693 keep} {292 out,} {1127 It's} {9832 tuna} {1369 roll}
