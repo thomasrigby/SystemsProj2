@@ -13,6 +13,7 @@
 #include <getopt.h>
 #include <stdint.h>
 #include <limits.h>
+#include <sys/types.h>
 
 
 //defining struct and type LIST 
@@ -54,3 +55,5 @@ extern void printDashF(char *pathname, int word);
 extern int MAX;
 
 extern LIST *hashtable[];
+
+extern int checkIfFile(char *file);
