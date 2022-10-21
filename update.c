@@ -1,46 +1,39 @@
 #include "trove.h"
 
-// Build trove will take in a filename for the troveFile, then will take in
-// a list of files to be added to the troveFile, the length of the words.
+int updateTroveFile(LIST *list, char* trovefile, int length){
+    //Send a duplicate to the remove function
 
-int buildTrove(LIST *list, char *troveFile, int length)
-{
+    LIST *list2 = malloc(sizeof(LIST));
+    list2 = list;
+    removeFileFromTrove(list2, trovefile);
 
-    // Run TraverseDirectory on each file in the list
-    while (list->stringVal != NULL)
-    {
-        traverseDirectory(list->stringVal);
-        list = list->nextVal;
+
+    //now since we have all the values ingested into the hash table, we can now start adding the files
+    //to the trove file
+
+    //open the trove file
+    FILE *troveFile = fopen(trovefile, "a");
+    if(troveFile == NULL){
+        printf("Error opening trove file");
+        exit(1);
     }
-    // Open the tempfile
+    //open the tempfile
     FILE *tempFile = fopen("tempFile.txt", "r");
-    if (tempFile == NULL)
-    {
+    if(tempFile == NULL){
         printf("Error opening tempfile");
         exit(1);
     }
-    // read the tempfile
+    //read the tempfile
     char *line = NULL;
     size_t len = 0;
     ssize_t read;
-    // Create a new troveFile
-    FILE *newTroveFile = fopen(troveFile, "w+");
-    if (newTroveFile == NULL)
-    {
-        printf("Error opening troveFile");
-        exit(1);
-    }
-
+    //Read the tempfile line by line
     char *hashmap = malloc(sizeof(char) * 10000);
     strcat(hashmap, "hashtable:");
 
-    // Read the tempfile line by line
-    while ((read = getline(&line, &len, tempFile)) != -1)
-    {
+    while((read = getline(&line, &len, tempFile)) != -1){
         // Remove the newline character
         line[strlen(line) - 1] = '\0';
-        // Open the file
-        printf("Opening file: %s\n", line);
         FILE *file = fopen(line, "r");
         if (file == NULL)
         {

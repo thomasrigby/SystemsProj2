@@ -1,8 +1,6 @@
 #include "trove.h"
 
 int removeFileFromTrove(LIST *list, char* troveFile){
-
-
     //Open the troveFile
     FILE *trove = fopen(troveFile, "r+");
     if(trove == NULL){
@@ -13,12 +11,33 @@ int removeFileFromTrove(LIST *list, char* troveFile){
     char *line = NULL;
     size_t len = 0;
     ssize_t read;
-    //For each line in the troveFile
-    //if there is a match with the file, remove it (use strstr)
-    //must get through all files in list
+
+    //Create a new tempfile
     while(list->stringVal != NULL){
-        while((read = getline(&line, &len, trove)) != -1){
-            if(strstr(line, list->stringVal) != NULL){
+        traverseDirectory(list->stringVal);
+        list = list->nextVal;
+    }
+
+    FILE *tempFile = fopen("tempFile.txt", "r");
+    if(tempFile == NULL){
+        printf("Error opening tempfile");
+        exit(1);
+    }
+    //Read the tempfile
+    char *tempLine = NULL;
+    size_t tempLen = 0;
+    ssize_t tempRead;
+
+    while((tempRead = getline(&tempLine, &tempLen, tempFile)) != -1){
+        //get the filename from the tempfile
+        char *filename = strtok(tempLine, " ");
+        //remove the newline character
+        filename[strlen(filename) - 1] = '\0';
+        //This is from the temp file
+        while((read = getline(&line, &len, trove)) != -1){ //this is in the trove file
+            // this is comparing the filename from the temp file to the trove file
+            char *troveFilename = strtok(line, " ");
+            if(strstr(troveFilename, filename) != NULL){
                 fseek(trove, -read, SEEK_CUR);
                 int i;
                 for(i = 0; i < read - 1; i++){
@@ -29,9 +48,14 @@ int removeFileFromTrove(LIST *list, char* troveFile){
                 fseek(trove, -read, SEEK_CUR);
             }
         }
-        list = list->nextVal;
     }
+
+    //Close the troveFile
     fclose(trove);
+    //Close the tempfile
+    fclose(tempFile);
+    //Remove the tempfile
+    remove("tempFile.txt");
     ingestHashTableFromFile(troveFile);
     return 0;
 }
