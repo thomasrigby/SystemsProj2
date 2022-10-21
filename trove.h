@@ -13,6 +13,7 @@
 #include <getopt.h>
 #include <stdint.h>
 #include <limits.h>
+#include <sys/types.h>
 
 
 //defining struct and type LIST 
@@ -52,3 +53,5 @@ extern int removeTokenFromStoredHashMap(char *token, char *troveFile);
 extern int MAX;
 
 extern LIST *hashtable[];
+
+extern int checkIfFile(char *file);
