@@ -36,16 +36,19 @@ int buildTrove(LIST *list, char *troveFile, int length){
         //Remove the newline character
         line[strlen(line) - 1] = '\0';
         //Open the file
+        printf("Opening file: %s\n", line);
         FILE *file = fopen(line, "r");
         if(file == NULL){
-            printf("Error opening file");
+            printf("Error opening file %s\n", line);
             exit(1);
         }
         //Read the file
         char *fileLine = NULL;
         size_t fileLen = 0;
         ssize_t fileRead;
-        char *string = line;
+        char *string;
+        string = malloc(sizeof(char) * 10000);
+        strcpy(string, line);
         //Read the file and get each word
         while((fileRead = getline(&fileLine, &fileLen, file)) != -1){
             //Remove the newline character

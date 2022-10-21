@@ -1,6 +1,6 @@
 //header file to define structs to store directories and values 
 #define POSIX_SOURCE 200809L
-
+#define _GNU_SOURCE
 
 #include <stdio.h>
 #include <stdlib.h>

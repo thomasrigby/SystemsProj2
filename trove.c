@@ -20,7 +20,7 @@ int main(int argc, char *argv[]){
   while ((opt = getopt(argc, argv, "f:brul:")) != -1) {
     switch (opt) {
     case 'f':
-      //trovefile = optarg;
+      trovefile = optarg;
       break;
     case 'b':
       if (argFlag == 0) {
