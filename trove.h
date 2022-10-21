@@ -41,6 +41,14 @@ extern char findWordInTrove(char *directory, char *word);
 
 extern int buildTrove(LIST *list, char *troveFile, int length);
 
+extern int removeFileFromTrove(LIST *list, char *file);
+
+extern void ingestHashTableFromFile(char *troveFile);
+
+extern int searchForTokenInTrove(char *token, char *troveFile);
+
+extern int removeTokenFromStoredHashMap(char *token, char *troveFile);
+
 extern int MAX;
 
 extern LIST *hashtable[];

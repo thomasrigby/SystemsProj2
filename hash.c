@@ -24,7 +24,7 @@ void addToHash(char *address){
 //prints hash table values atm for debugging reasons
 void printHashTable(void)
 {
-        for (int i = 0; i <MAX; i++){
+        for (int i = 0; i <1000; i++){
             printf("\n---[%i]---\n", i);
             printList(hashtable[i]); 
         }

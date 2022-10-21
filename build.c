@@ -69,7 +69,7 @@ int buildTrove(LIST *list, char *troveFile, int length){
                     if(strstr(hashmap, hashString) == NULL){
                         strcat(hashmap, " {");
                         strcat(hashmap, hashString);
-                        strcat(hashmap, ":");
+                        strcat(hashmap, " ");
                         strcat(hashmap, word);
                         strcat(hashmap, "}");
                     }

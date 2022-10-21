@@ -96,6 +96,7 @@ int main(int argc, char *argv[]){
           char *filelist = argv[i];
           fl = addToList(fl, filelist);
       }
+    removeFileFromTrove(fl, trovefile);
   }
   else if(argFlag == 3){
      for(int i = optind; i < argc; i++){
