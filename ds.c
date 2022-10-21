@@ -23,7 +23,6 @@ LIST *addToList(LIST *previousList, char *stringVal)
 
 //function to print the list 
 void printList(LIST *list){
-
     while(list != NULL){
         printf("List Value: %s\n", list->stringVal);
         list = list->nextVal;

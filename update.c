@@ -2,15 +2,9 @@
 
 int updateTroveFile(LIST *list, char* trovefile, int length){
     //Send a duplicate to the remove function
-
     LIST *list2 = malloc(sizeof(LIST));
     list2 = list;
     removeFileFromTrove(list2, trovefile);
-
-
-    //now since we have all the values ingested into the hash table, we can now start adding the files
-    //to the trove file
-
     //open the trove file
     FILE *troveFile = fopen(trovefile, "a");
     if(troveFile == NULL){
@@ -18,6 +12,7 @@ int updateTroveFile(LIST *list, char* trovefile, int length){
         exit(1);
     }
     //open the tempfile
+    printf("Opening tempfile\n");
     FILE *tempFile = fopen("tempFile.txt", "r");
     if(tempFile == NULL){
         printf("Error opening tempfile");
@@ -27,9 +22,11 @@ int updateTroveFile(LIST *list, char* trovefile, int length){
     char *line = NULL;
     size_t len = 0;
     ssize_t read;
-    //Read the tempfile line by line
-    char *hashmap = malloc(sizeof(char) * 10000);
+    
+    char *hashmap = malloc(sizeof(char) * 100000);
     strcat(hashmap, "hashtable:");
+    
+
 
     while((read = getline(&line, &len, tempFile)) != -1){
         // Remove the newline character
@@ -50,47 +47,43 @@ int updateTroveFile(LIST *list, char* trovefile, int length){
         // Read the file and get each word
         while ((fileRead = getline(&fileLine, &fileLen, file)) != -1)
         {
-            // Remove the newline character
             fileLine[strlen(fileLine)] = '\0';
-            // Get the word
             char *word = strtok(fileLine, " ");
-            // While there are still words
             while (word != NULL)
             {
-                // If the word is the correct length
                 if (strlen(word) == length)
                 {
                     addToHash(word);
-                    char *hashString = malloc(sizeof(char) * 10);
-                    sprintf(hashString, "%d", (hashValue(word) % MAX));
-                    if (strstr(string, hashString) == NULL)
-                    {
-                        strcat(string, " ");
-                        strcat(string, hashString);
-                    }
-                    if (strstr(hashmap, hashString) == NULL)
-                    {
-                        strcat(hashmap, " {");
-                        strcat(hashmap, hashString);
-                        strcat(hashmap, " ");
-                        strcat(hashmap, word);
-                        strcat(hashmap, "}");
-                    }
                 }
                 // Get the next word
                 word = strtok(NULL, " ");
             }
         }
-        fprintf(newTroveFile, "%s\n", string);
+        //Get all the words from the hash table and add them to the trove file
+
+        for(int i = 0; i < MAX; i++){
+            if(hashtable[i] != NULL){
+                strcat(hashmap, "{");
+                //turn uint32_t to string
+                char *key = malloc(sizeof(char) * 100);
+                sprintf(key, "%d", hashValue(hashtable[i]->stringVal));
+                strcat(hashmap, key);
+                strcat(hashmap, " ");
+                strcat(hashmap, hashtable[i]->stringVal);
+            }
+        }
+
+        fprintf(troveFile, "%s\n", string);
         // Close the file
         fclose(file);
     }
 
+
     // Close the tempfile
     fclose(tempFile);
     // Close the troveFile
-    fprintf(newTroveFile, "%s", hashmap);
-    fclose(newTroveFile);
+    fprintf(troveFile, "%s", hashmap);
+    fclose(troveFile);
 
     // Delete the tempfile
     remove("tempFile.txt");

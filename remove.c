@@ -54,8 +54,6 @@ int removeFileFromTrove(LIST *list, char* troveFile){
     fclose(trove);
     //Close the tempfile
     fclose(tempFile);
-    //Remove the tempfile
-    remove("tempFile.txt");
     ingestHashTableFromFile(troveFile);
     return 0;
 }
