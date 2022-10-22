@@ -42,6 +42,6 @@ void printCompPath(char *pathname, int word)
             }
             char *path = realpath(line, buf);
             printf("%s\n", path);
-         }
         }
+    }
 }

@@ -12,6 +12,7 @@ int main(int argc, char *argv[]){
   LIST *fl = malloc(sizeof(LIST)); 
 
 
+//Call to find trove file and search for word 
   //We are using opt to get the command line options
   while ((opt = getopt(argc, argv, "f:brul:")) != -1) {
     switch (opt) {
@@ -85,9 +86,9 @@ int main(int argc, char *argv[]){
           char *filelist = argv[i];
           fl = addToList(fl, filelist);
       }
-       char str [strlen(trovefile)+1];
-        strcpy(str, ".");
-        strcat(str, trovefile);
+      char str [strlen(trovefile)+1];
+      strcpy(str, ".");
+      strcat(str, trovefile);
       buildTrove(fl, str, length);
     }
   }
@@ -96,19 +97,27 @@ int main(int argc, char *argv[]){
           char *filelist = argv[i];
           fl = addToList(fl, filelist);
       }
-    removeFileFromTrove(fl, trovefile);
+      char str [strlen(trovefile)+1];
+      strcpy(str, ".");
+      strcat(str, trovefile);
+      printf("%s\n", str);
+      removeFileFromTrove(fl, str);
   }
   else if(argFlag == 3){
-     for(int i = optind; i < argc; i++){
-          char *filelist = argv[i];
-          fl = addToList(fl, filelist);
-      }
+    for(int i = optind; i < argc; i++){
+      char *filelist = argv[i];
+      fl = addToList(fl, filelist);
+    }
+    char str [strlen(trovefile)+1];
+    strcpy(str, ".");
+    strcat(str, trovefile);
+    updateTroveFile(fl, str, length);
   }
   else{
     printf("Error: Invalid argument\n");
     exit(1);
   }
+  //printList(fl);
   
   return 0;
-
 }

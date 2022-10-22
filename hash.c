@@ -16,7 +16,7 @@ uint32_t hashValue(char *address){
 
 //adds strings as hash values to hashTable
 void addToHash(char *address){
-    int h = hashValue(address) %MAX;
+    int h = hashValue(address) % MAX;
 
     hashtable[h] = addToList(hashtable[h], address);
 }

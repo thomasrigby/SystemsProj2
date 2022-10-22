@@ -36,19 +36,27 @@ extern int buildTrove(LIST *list, char *troveFile, int length); //function to bu
 
 extern int removeFileFromTrove(LIST *list, char *file); //removing file/s from trove file 
 
-extern void ingestHashTableFromFile(char *troveFile); //function to remove hashtable from file 
+extern char findWordInTrove(char *directory, char *word);
 
-extern int searchForTokenInTrove(char *token, char *troveFile); //function to find a token in a trove file
+extern int buildTrove(LIST *list, char *troveFile, int length);
 
-extern int removeTokenFromStoredHashMap(char *token, char *troveFile); //function to remove a token from hashtable
+extern int removeFileFromTrove(LIST *list, char *file);
 
-extern void findTrove(char *pathname, int word); //function to check if trove file exists 
+extern void ingestHashTableFromFile(char *troveFile);
 
-extern void printCompPath(char *pathname, int word); //function that prints the complete pathname of files with desired word 
+extern int searchForTokenInTrove(char *token, char *troveFile);
 
-extern int checkIfFile(char *file); //function to check if a file or directory 
+extern int removeTokenFromStoredHashMap(char *token, char *troveFile);
 
-extern int MAX; //global variable for max size 
+extern void findTrove(char *pathname, int word);
+
+extern void printDashF(char *pathname, int word);
+
+extern int updateTroveFile(LIST *list, char *troveFile, int length);
+
+extern int replaceHashTable(char *troveFile);
+
+extern int MAX;
 
 extern LIST *hashtable[]; //global variable for hashtable 
 

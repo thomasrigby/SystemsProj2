@@ -11,7 +11,6 @@ void traverseDirectory(char *directoryName){
             printf("Error opening tempfile");
             exit(1);
         }
-
         fprintf(tempFile, "%s", directoryName);
         fprintf(tempFile, "\n");
         fclose(tempFile);
