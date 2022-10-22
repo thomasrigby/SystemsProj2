@@ -120,8 +120,5 @@ int main(int argc, char *argv[]){
     printf("Error: Invalid argument\n");
     exit(1);
   }
-  //printList(fl);
-  
   return 0;
-
 }

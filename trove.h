@@ -54,6 +54,8 @@ extern void printDashF(char *pathname, int word);
 
 extern int updateTroveFile(LIST *list, char *troveFile, int length);
 
+extern int replaceHashTable(char *troveFile);
+
 extern int MAX;
 
 extern LIST *hashtable[];

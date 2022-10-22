@@ -16,7 +16,7 @@ uint32_t hashValue(char *address){
 
 //adds strings as hash values to hashTable
 void addToHash(char *address){
-    int h = hashValue(address) %MAX;
+    int h = hashValue(address) % MAX;
 
     hashtable[h] = addToList(hashtable[h], address);
 }
@@ -24,10 +24,10 @@ void addToHash(char *address){
 //prints hash table values atm for debugging reasons
 void printHashTable(void)
 {
-        for (int i = 0; i <1000; i++){
-            printf("\n---[%i]---\n", i);
-            printList(hashtable[i]); 
-        }
+    for (int i = 0; i <1000; i++){
+        printf("\n---[%i]---\n", i);
+        printList(hashtable[i]); 
+    }
 }
 
 int getHashValue(char *word){

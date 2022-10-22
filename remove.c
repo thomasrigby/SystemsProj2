@@ -28,6 +28,7 @@ int removeFileFromTrove(LIST *list, char* troveFile){
     size_t tempLen = 0;
     ssize_t tempRead;
 
+
     while((tempRead = getline(&tempLine, &tempLen, tempFile)) != -1){
         //get the filename from the tempfile
         char *filename = strtok(tempLine, " ");
@@ -35,25 +36,28 @@ int removeFileFromTrove(LIST *list, char* troveFile){
         filename[strlen(filename) - 1] = '\0';
         //This is from the temp file
         while((read = getline(&line, &len, trove)) != -1){ //this is in the trove file
-            // this is comparing the filename from the temp file to the trove file
-            char *troveFilename = strtok(line, " ");
-            if(strstr(troveFilename, filename) != NULL){
+            if(strstr(line, filename)  != NULL){
                 fseek(trove, -read, SEEK_CUR);
                 int i;
                 for(i = 0; i < read - 1; i++){
                     fputc(' ', trove);
                 }
-                //set newline character at end of line
                 fputc('\n', trove);
                 fseek(trove, -read, SEEK_CUR);
+                //i need to reset the while loop
+                break;
+            
             }
         }
+        //reset for the while loo
+        fseek(trove, 0, SEEK_SET);
     }
-
     //Close the troveFile
     fclose(trove);
     //Close the tempfile
     fclose(tempFile);
+    //Remove the tempfile
+    remove("tempFile.txt");
     ingestHashTableFromFile(troveFile);
     return 0;
 }
@@ -93,7 +97,6 @@ void ingestHashTableFromFile(char* file){
                         strcat(tempString, " ");
                         token = strtok(NULL, " ");
                         strcat(tempString, token);
-                        printf("token: %s\n", tempString);
                         removeTokenFromStoredHashMap(tempString, file);
                         free(tempString);
                     } 
@@ -133,6 +136,7 @@ int searchForTokenInTrove(char *token, char *trovefile){
 }
 
 int removeTokenFromStoredHashMap(char* token, char* trovefile){
+    printf("TOKEN: %s\n", token);
     //open the trovefile
     FILE *fp = fopen(trovefile, "r+");
     if(fp == NULL){

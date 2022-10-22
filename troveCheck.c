@@ -43,7 +43,7 @@ void printDashF(char *pathname, int word)
             exit(1);
             }
          while((read = getline(&line, &len, t)) != -1){
-          if((strstr(line, lineStart) && strstr(line, wString))){
+        if((strstr(line, lineStart) && strstr(line, wString))){
             token = strtok(line, s);
             /* walk through other tokens */
             while(token != NULL) {
@@ -51,6 +51,6 @@ void printDashF(char *pathname, int word)
             }
              char *path = realpath(line, buf);
             printf("%s\n", path);
-         }
         }
+    }
 }
