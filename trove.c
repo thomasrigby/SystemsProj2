@@ -4,18 +4,14 @@
 #include "trove.h"
 
 //main function to receive and validate the command-line options and arguments
-//command line format is  ./trove  [-f trovefile]  word 
-// command line format is ./trove  [-f trovefile]  [-b  |  -r  |  -u]  [-l length]  filelist
 int main(int argc, char *argv[]){
-  char *trovefile = "/tmp/trove.txt";
+  char *trovefile = "/tmp/trove.txt"; //default trove file name
   int opt;
   int argFlag = 0;
   int length = 4;
-  LIST *fl = malloc(sizeof(LIST));
- 
-  //CALLING REALPATH to find realpath of trove-file
+  LIST *fl = malloc(sizeof(LIST)); 
 
-//Call to find trove file and search for word 
+
   //We are using opt to get the command line options
   while ((opt = getopt(argc, argv, "f:brul:")) != -1) {
     switch (opt) {
@@ -112,7 +108,6 @@ int main(int argc, char *argv[]){
     printf("Error: Invalid argument\n");
     exit(1);
   }
-  //printList(fl);
   
   return 0;
 

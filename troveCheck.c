@@ -1,55 +1,46 @@
 #include "trove.h"
 
+//function to find the trove file absolute path 
 void findTrove(char *pathname, int word)
 {
-    //given the pathname (if one not provided, /tmp/trove), use realpath to see if it exists 
-    //if it does, (for now), print something
-    //if it doesn't print failure 
-    //String concatention time 
-    //int fword = word;
-    char buf[PATH_MAX+1];
-    char *path = realpath(pathname, buf);
+    char buf[PATH_MAX+1]; //buffer to store pathname
+    char *path = realpath(pathname, buf); //stores realpath pathname
     if(path != NULL)
     {
-        // printf("The complete file path of trove file %s is: %s\n", pathname, buf);
-        // printf("Searching through trove-file to print pathnames\n");
-     //Call printWord 
-     printDashF(pathname, word);
-    }
-          
+     printCompPath(pathname, word); 
+    }   
     else{
         printf("Trove file does not exist!\n");
         }
-    
 }
 
-void printDashF(char *pathname, int word)
+//print complete path 
+void printCompPath(char *pathname, int word)
 {
     char *line = NULL;
-    size_t len = 0;
-    ssize_t read;
-    char wString[10000];
-    const char s[1] = " ";
-    char *token;
-    char buf[PATH_MAX+1];
-   
-    //printf("%d\n", word%10000);
-    sprintf(wString, "%d", word%10000);
-    //printf("%s\n", wString);
-    char *lineStart = "./";
+    size_t length = 0; //lengthgth
+    ssize_t read; //reading file provided 
+
+    char wordAsString[10000];
+    const char s[1] = " "; //space to detect when word ends
+    char *token; //token to grab first word of line
+    char buf[PATH_MAX+1]; //buffer to store realpath 
+    sprintf(wordAsString, "%d", word%10000); //converts integer to char 
+
+    char *lineStart = "./"; //start of path
     FILE *t = fopen(pathname, "r");
          if(t == NULL){
             printf("Error opening trove");
             exit(1);
             }
-         while((read = getline(&line, &len, t)) != -1){
-          if((strstr(line, lineStart) && strstr(line, wString))){
+         while((read = getline(&line, &length, t)) != -1){
+            //checks if hash value is in on line next to the file name 
+          if((strstr(line, lineStart) && strstr(line, wordAsString))){ 
             token = strtok(line, s);
-            /* walk through other tokens */
             while(token != NULL) {
                 token = strtok(NULL, s);
             }
-             char *path = realpath(line, buf);
+            char *path = realpath(line, buf);
             printf("%s\n", path);
          }
         }
